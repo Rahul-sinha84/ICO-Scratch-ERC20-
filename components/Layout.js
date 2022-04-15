@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import {
-  contractAddress,
+  tokenAddress,
+  tokenSaleAddress,
+  moneyCollectorAddress,
   checkMetamaskStatus,
   connectMetamask,
   firstFunc,
@@ -9,7 +11,9 @@ import {
 
 import { connect } from "react-redux";
 import {
-  changeContractInstance,
+  changeTokenInstance,
+  changeMoneyCollectorInstance,
+  changeTokenSaleInstance,
   changeLoad,
   changeCurrentAccount,
   changeMetamaskConnectFunction,
@@ -19,7 +23,9 @@ import {
 
 const Layout = ({
   children,
-  changeContractInstance,
+  changeTokenInstance,
+  changeTokenSaleInstance,
+  changeMoneyCollectorInstance,
   changeMetamaskConnectFunction,
   changeCurrentAccount,
   changeLoad,
@@ -39,7 +45,9 @@ const Layout = ({
   //default
   useEffect(() => {
     firstFunc(
-      changeContractInstance,
+      changeTokenInstance,
+      changeTokenSaleInstance,
+      changeMoneyCollectorInstance,
       changeCurrentAccount,
       changeNetworkId,
       changeMetamaskStatus
@@ -70,7 +78,9 @@ const Layout = ({
       ) : (
         <>
           {children}
-          <h3>Contract address: {contractAddress}</h3>
+          <h3> Token Contract address: {tokenAddress}</h3>
+          <h3> TokenSale Contract address: {tokenSaleAddress}</h3>
+          <h3> Money Collector Contract address: {moneyCollectorAddress}</h3>
           <h4>Current account: {currentAccount}</h4>
           <h4>Current chain-id: {networkId}</h4>
         </>
@@ -81,7 +91,9 @@ const Layout = ({
 
 const mapStateToState = (state) => ({ state });
 export default connect(mapStateToState, {
-  changeContractInstance,
+  changeTokenInstance,
+  changeTokenSaleInstance,
+  changeMoneyCollectorInstance,
   changeMetamaskConnectFunction,
   changeCurrentAccount,
   changeLoad,

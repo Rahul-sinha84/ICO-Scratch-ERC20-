@@ -1,18 +1,28 @@
 import {
-  CONTRACT_INSTANCE,
   CURRENT_ACCOUNT,
   LOAD,
   METAMASK_CONNECT_FUNCTION,
   METAMASK_STATUS,
+  MONEYCOLLECTOR_INSTANCE,
   NETWORK_ID,
+  TOKENSALE_INSTANCE,
+  TOKEN_INSTANCE,
 } from "./types";
 
 export const changeMetamaskStatus = (payload) => ({
   type: METAMASK_STATUS,
   payload,
 });
-export const changeContractInstance = (payload) => ({
-  type: CONTRACT_INSTANCE,
+export const changeTokenInstance = (payload) => ({
+  type: TOKEN_INSTANCE,
+  payload,
+});
+export const changeTokenSaleInstance = (payload) => ({
+  type: TOKENSALE_INSTANCE,
+  payload,
+});
+export const changeMoneyCollectorInstance = (payload) => ({
+  type: MONEYCOLLECTOR_INSTANCE,
   payload,
 });
 export const changeCurrentAccount = (payload) => ({

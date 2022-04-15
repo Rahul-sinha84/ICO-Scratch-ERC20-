@@ -5,15 +5,26 @@ import {
   LOAD,
   METAMASK_CONNECT_FUNCTION,
   METAMASK_STATUS,
+  MONEYCOLLECTOR_INSTANCE,
   NETWORK_ID,
+  TOKENSALE_INSTANCE,
+  TOKEN_INSTANCE,
 } from "./types";
 
 const metamaskStatus = (state = false, action) => {
   if (action.type === METAMASK_STATUS) return action.payload;
   return state;
 };
-const contractInstance = (state = {}, action) => {
-  if (action.type === CONTRACT_INSTANCE) return action.payload;
+const tokenInstance = (state = {}, action) => {
+  if (action.type === TOKEN_INSTANCE) return action.payload;
+  return state;
+};
+const tokenSaleInstance = (state = {}, action) => {
+  if (action.type === TOKENSALE_INSTANCE) return action.payload;
+  return state;
+};
+const moneyCollectorInstance = (state = {}, action) => {
+  if (action.type === MONEYCOLLECTOR_INSTANCE) return action.payload;
   return state;
 };
 const currentAccount = (state = "", action) => {
@@ -35,7 +46,9 @@ const load = (state = false, action) => {
 
 export default combineReducers({
   metamaskConnectFunction,
-  contractInstance,
+  tokenInstance,
+  tokenSaleInstance,
+  moneyCollectorInstance,
   currentAccount,
   metamaskStatus,
   networkId,

@@ -1,13 +1,17 @@
 import { ethers } from "ethers";
-// enter the contract address in the .env.local as 'NEXT_PUBLIC_CONTRACT_ADDRESS'
-// in the root directory
-export const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
-//import artifacts of the contract as 'Artifacts' here !!
-const Artifacts = "";
-// import Artifacts from "../artifacts/contracts/Greeter.sol/Greeter.json";
+export const tokenAddress = process.env.NEXT_PUBLIC_TOKEN_ADDRESS;
+export const tokenSaleAddress = process.env.NEXT_PUBLIC_TOKENSALE_ADDRESS;
+export const moneyCollectorAddress =
+  process.env.NEXT_PUBLIC_MONEYCOLLECTOR_ADDRESS;
+
+import tokenArtifacts from "../artifacts/contracts/Token.sol/Token.json";
+import tokenSaleArtifacts from "../artifacts/contracts/TokenSale.sol/TokenSale.json";
+import moneyCollectorArtifacts from "../artifacts/contracts/MoneyCollector.sol/MoneyCollector.json";
 
 export const firstFunc = async (
-  setContract,
+  setToken,
+  setTokenSale,
+  setMoneyCollector,
   setCurrentAccount,
   setCurrentNetworkId,
   setMetamaskConnected
@@ -23,18 +27,29 @@ export const firstFunc = async (
   } else {
     setMetamaskConnected(false);
   }
-  const contract = await initialiseContract(_signer);
-  setContract(contract);
+  const { token, tokenSale, moneyCollector } = await initialiseContract(
+    _signer
+  );
+  setToken(token);
+  setTokenSale(tokenSale);
+  setMoneyCollector(moneyCollector);
 };
 
 export const initialiseContract = async (_signer) => {
-  if (!contractAddress) return;
-  const _contract = new ethers.Contract(
-    contractAddress,
-    Artifacts.abi,
+  if (!tokenAddress || !tokenSaleAddress || !moneyCollectorAddress) return;
+  const token = new ethers.Contract(tokenAddress, tokenArtifacts.abi, _signer);
+  const tokenSale = new ethers.Contract(
+    tokenSaleAddress,
+    tokenSaleArtifacts.abi,
     _signer
   );
-  return _contract;
+  const moneyCollector = new ethers.Contract(
+    moneyCollectorAddress,
+    moneyCollectorArtifacts.abi,
+    _signer
+  );
+
+  return { token, tokenSale, moneyCollector };
 };
 
 export const connectMetamask = async (setMetamaskConnected) => {
