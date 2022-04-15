@@ -8,7 +8,7 @@ import "./MoneyCollector.sol";
 contract TokenSale is KYCContract {
     Token tokenContract;
     MoneyCollector moneyContract;
-    uint256 private rate;
+    uint256 public rate;
     uint256 public weiCollected;
     uint256 public tokenCollected;
 
