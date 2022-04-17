@@ -10,6 +10,7 @@ contract KYCContract {
 
     constructor() {
         owner = msg.sender;
+        isKyc[owner] = true;
     }
 
     function getOwner() public view returns (address) {

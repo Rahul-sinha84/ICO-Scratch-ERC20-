@@ -1,8 +1,5 @@
 import { useEffect } from "react";
 import {
-  tokenAddress,
-  tokenSaleAddress,
-  moneyCollectorAddress,
   checkMetamaskStatus,
   connectMetamask,
   firstFunc,
@@ -19,7 +16,14 @@ import {
   changeMetamaskConnectFunction,
   changeMetamaskStatus,
   changeNetworkId,
+  changeIsOwner,
+  changeAccountBalance,
+  changeContractBalance,
+  changeTotalTokensSold,
+  changeTotalWeiCollected,
+  changeCurrentRate,
 } from "../redux/action";
+import Header from "./Header";
 
 const Layout = ({
   children,
@@ -28,13 +32,21 @@ const Layout = ({
   changeMoneyCollectorInstance,
   changeMetamaskConnectFunction,
   changeCurrentAccount,
+  changeIsOwner,
   changeLoad,
   changeNetworkId,
   changeMetamaskStatus,
+  changeCurrentRate,
+  changeAccountBalance,
+  changeContractBalance,
+  changeTotalTokensSold,
+  changeTotalWeiCollected,
   state,
 }) => {
   const {
-    contractInstance,
+    tokenInstance,
+    tokenSaleInstance,
+    moneyCollectorInstance,
     currentAccount,
     load,
     networkId,
@@ -63,27 +75,42 @@ const Layout = ({
   // for updating the change when metamask configuration changes !!
   useEffect(() => {
     // function to update the values of state
-    //    getContractData();
+    getContractData();
     // for listening of events
     //    listenToEvents(contract);
-  }, [currentAccount, contractInstance, load]);
+  }, [currentAccount, load]);
+
+  const getContractData = async () => {
+    if (
+      !tokenInstance ||
+      !tokenSaleInstance ||
+      !moneyCollectorInstance ||
+      !currentAccount
+    )
+      return;
+    const _owner = await tokenSaleInstance.getOwner();
+    changeIsOwner(parseInt(_owner, 16) === parseInt(currentAccount, 16));
+    const _currentRate = await tokenSaleInstance.rate();
+    changeCurrentRate(_currentRate.toNumber());
+    const _totalWeiCollected = await tokenSaleInstance.weiCollected();
+    changeTotalWeiCollected(_totalWeiCollected.toNumber());
+    const _totalTokenSold = await tokenSaleInstance.tokenCollected();
+    changeTotalTokensSold(_totalTokenSold.toNumber());
+    const _accountBalance = await tokenInstance.getBalance(currentAccount);
+    changeAccountBalance(_accountBalance.toNumber());
+    const _contractBalance = await moneyCollectorInstance.getBalance();
+    changeContractBalance(_contractBalance.toNumber());
+  };
 
   return (
     <>
-      <h1>Hello, Blockchain !!</h1>
+      <Header />
       {!metamaskStatus ? (
-        <button onClick={() => metamaskConnectFunction(changeMetamaskStatus)}>
-          Connect Metamask
-        </button>
+        <div className="main__warning-msg">
+          Please Connect your Metamask Wallet to continue !!
+        </div>
       ) : (
-        <>
-          {children}
-          <h3> Token Contract address: {tokenAddress}</h3>
-          <h3> TokenSale Contract address: {tokenSaleAddress}</h3>
-          <h3> Money Collector Contract address: {moneyCollectorAddress}</h3>
-          <h4>Current account: {currentAccount}</h4>
-          <h4>Current chain-id: {networkId}</h4>
-        </>
+        <>{children}</>
       )}
     </>
   );
@@ -99,4 +126,10 @@ export default connect(mapStateToState, {
   changeLoad,
   changeNetworkId,
   changeMetamaskStatus,
+  changeIsOwner,
+  changeCurrentRate,
+  changeAccountBalance,
+  changeContractBalance,
+  changeTotalTokensSold,
+  changeTotalWeiCollected,
 })(Layout);

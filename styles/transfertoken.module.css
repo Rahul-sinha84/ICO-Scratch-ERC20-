@@ -1,0 +1,31 @@
+.transfer-token {
+  margin: 4rem auto;
+}
+.transfer-token__container {
+  margin: 0 4rem;
+}
+.transfer-token__container--heading {
+  font-size: 2.5rem;
+  font-weight: 600;
+
+  text-decoration: underline;
+}
+.transfer-token__container--input {
+  margin: 2rem auto;
+}
+.transfer-token__input {
+  font-size: 1.5rem;
+  padding: 0.4rem 0.5rem;
+  margin-right: 5rem;
+}
+.transfer-token__input--address {
+  width: 60%;
+}
+.transfer-token__btn {
+  font-size: 1.5rem;
+  padding: 0.4rem 0.5rem;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  margin-top: 2rem;
+}

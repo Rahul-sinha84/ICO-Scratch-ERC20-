@@ -1,0 +1,66 @@
+.header {
+  background-color: black;
+  color: greenyellow;
+  font-weight: bold;
+}
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+}
+.header__container--first {
+  display: flex;
+  flex: 2;
+  justify-content: space-around;
+}
+.header__container--first__item {
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.header__container--first__item a {
+  text-decoration: none;
+  color: greenyellow;
+}
+.header__container--second {
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+.header__connect-button {
+}
+.header__connect-button button {
+  outline: none;
+  background-color: black;
+  border: 5px solid greenyellow;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 1rem 3rem;
+  font-size: 1.1rem;
+  color: greenyellow;
+  font-weight: bold;
+}
+.header__address-display {
+  border: 3px solid greenyellow;
+  padding: 0.4rem 1rem;
+  border-radius: 50rem;
+}
+.header__address-display--container {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.header-bottom {
+  background-color: greenyellow;
+}
+.header-bottom__container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.header-bottom-item {
+  /* color: #fff; */
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.5rem 1rem;
+}

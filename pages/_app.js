@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <Layout>
         <Head>
-          <title>Next-Hardhat template</title>
+          <title>ICO</title>
         </Head>
         <Component {...pageProps} />;
       </Layout>

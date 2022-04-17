@@ -1,0 +1,27 @@
+.approve-kyc {
+  margin: 4rem auto;
+}
+.approve-kyc__container {
+  margin: 0 4rem;
+}
+.approve-kyc__container--heading {
+  font-size: 2.5rem;
+  font-weight: 600;
+
+  text-decoration: underline;
+}
+.approve-kyc__container--input {
+  margin: 2rem auto;
+}
+.approve-kyc-input {
+  font-size: 1.5rem;
+  padding: 0.4rem 0.5rem;
+  width: 50%;
+}
+.approve-kyc-btn {
+  font-size: 1.5rem;
+  padding: 0.4rem 0.5rem;
+  cursor: pointer;
+  outline: none;
+  margin-left: 1rem;
+}
